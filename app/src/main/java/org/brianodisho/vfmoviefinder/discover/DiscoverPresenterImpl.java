@@ -73,6 +73,6 @@ public class DiscoverPresenterImpl extends MvpBasePresenter<DiscoverView> implem
 
     @Override
     public void onMovieClicked(Movie movie) {
-        router.showMovieView(movie.getId());
+        router.showMovieView(movie);
     }
 }

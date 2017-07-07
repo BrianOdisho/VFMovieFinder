@@ -6,7 +6,10 @@
     <string name="bottom_navigation_search">Search</string>
 
 
-    <string name="discovery_movie_star_rating">%s/10</string>
+    <string name="discovery_movie_star_rating">%.1f/10</string>
     <string name="error_discovery_retry">Error while loading movies. Pull down to retry.</string>
     <string name="error_discovery">Error while loading movies.</string>
+
+    <string name="movie_star_rating">%1$.1f/10 (%2$d Votes)</string>
+
 </resources>

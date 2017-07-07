@@ -52,7 +52,7 @@ public class DiscoverMovieAdapter extends RecyclerView.Adapter<DiscoverMovieAdap
 
         picasso.load(movie.getPosterPathFull()).into(holder.image);
         holder.textTitle.setText(movie.getTitle());
-        holder.textStarRating.setText(context.getString(R.string.discovery_movie_star_rating, String.valueOf(movie.getVoteAverage())));
+        holder.textStarRating.setText(context.getString(R.string.discovery_movie_star_rating, movie.getVoteAverage()));
         holder.textOverview.setText(movie.getOverview());
     }
 

@@ -1,5 +1,8 @@
 package org.brianodisho.vfmoviefinder.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.List;
 
 import com.google.gson.annotations.SerializedName;
@@ -43,7 +46,7 @@ public class DiscoverResponse {
     }
 
 
-    public static class Movie {
+    public static class Movie implements Parcelable {
 
         private static final String IMAGE_BASE_URL_BACKDROP = "https://image.tmdb.org/t/p/w780";
         private static final String IMAGE_BASE_URL_POSTER = "https://image.tmdb.org/t/p/w500";
@@ -89,6 +92,36 @@ public class DiscoverResponse {
 
         @SerializedName("release_date")
         private String releaseDate;
+
+
+        Movie(Parcel in) {
+            voteCount = in.readInt();
+            id = in.readInt();
+            video = in.readByte() != 0;
+            voteAverage = in.readDouble();
+            title = in.readString();
+            popularity = in.readDouble();
+            posterPath = in.readString();
+            originalLanguage = in.readString();
+            originalTitle = in.readString();
+            backdropPath = in.readString();
+            adult = in.readByte() != 0;
+            overview = in.readString();
+            releaseDate = in.readString();
+        }
+
+
+        public static final Creator<Movie> CREATOR = new Creator<Movie>() {
+            @Override
+            public Movie createFromParcel(Parcel in) {
+                return new Movie(in);
+            }
+
+            @Override
+            public Movie[] newArray(int size) {
+                return new Movie[size];
+            }
+        };
 
 
         public int getVoteCount() {
@@ -168,6 +201,28 @@ public class DiscoverResponse {
 
         public String getReleaseDate() {
             return releaseDate;
+        }
+
+        @Override
+        public int describeContents() {
+            return 0;
+        }
+
+        @Override
+        public void writeToParcel(Parcel dest, int flags) {
+            dest.writeInt(voteCount);
+            dest.writeInt(id);
+            dest.writeByte((byte) (video ? 1 : 0));
+            dest.writeDouble(voteAverage);
+            dest.writeString(title);
+            dest.writeDouble(popularity);
+            dest.writeString(posterPath);
+            dest.writeString(originalLanguage);
+            dest.writeString(originalTitle);
+            dest.writeString(backdropPath);
+            dest.writeByte((byte) (adult ? 1 : 0));
+            dest.writeString(overview);
+            dest.writeString(releaseDate);
         }
     }
 }
