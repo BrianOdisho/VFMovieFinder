@@ -11,4 +11,6 @@
     <dimen name="discover_movie_card_margin">8dp</dimen>
     <dimen name="discover_movie_card_text_margin">4dp</dimen>
 
+    <dimen name="movie_backdrop_height">200dp</dimen>
+
 </resources>

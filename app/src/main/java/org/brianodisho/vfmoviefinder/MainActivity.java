@@ -13,6 +13,7 @@ import com.hannesdorfmann.mosby3.mvp.MvpActivity;
 import org.brianodisho.vfmoviefinder.MainContract.MainPresenter;
 import org.brianodisho.vfmoviefinder.MainContract.MainView;
 import org.brianodisho.vfmoviefinder.discover.DiscoverFragment;
+import org.brianodisho.vfmoviefinder.movie.MovieActivity;
 
 
 /**
@@ -79,6 +80,11 @@ public class MainActivity extends MvpActivity<MainView, MainPresenter> implement
         if (getSupportActionBar() != null) {
             getSupportActionBar().setTitle(R.string.bottom_navigation_search);
         }
+    }
+
+    @Override
+    public void showMovieView(int movieId) {
+        MovieActivity.start(this, movieId);
     }
 
 

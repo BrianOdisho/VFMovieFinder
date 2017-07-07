@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 
 import com.hannesdorfmann.mosby3.mvp.lce.MvpLceFragment;
 
+import org.brianodisho.vfmoviefinder.MainRouter;
 import org.brianodisho.vfmoviefinder.R;
 import org.brianodisho.vfmoviefinder.CustomApplication;
 import org.brianodisho.vfmoviefinder.discover.DiscoverContract.DiscoverPresenter;
@@ -55,7 +56,7 @@ public class DiscoverFragment extends MvpLceFragment<SwipeRefreshLayout, List<Mo
     @NonNull
     @Override
     public DiscoverPresenter createPresenter() {
-        DiscoverPresenterImpl presenter = new DiscoverPresenterImpl();
+        DiscoverPresenterImpl presenter = new DiscoverPresenterImpl((MainRouter) getActivity());
         ((CustomApplication) getActivity().getApplication()).getApplicationComponent().inject(presenter);
         return presenter;
     }

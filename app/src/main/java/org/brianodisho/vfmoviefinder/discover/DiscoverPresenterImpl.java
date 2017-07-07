@@ -2,6 +2,7 @@ package org.brianodisho.vfmoviefinder.discover;
 
 import com.hannesdorfmann.mosby3.mvp.MvpBasePresenter;
 
+import org.brianodisho.vfmoviefinder.MainRouter;
 import org.brianodisho.vfmoviefinder.discover.DiscoverContract.DiscoverPresenter;
 import org.brianodisho.vfmoviefinder.discover.DiscoverContract.DiscoverView;
 import org.brianodisho.vfmoviefinder.model.DiscoverResponse;
@@ -20,10 +21,16 @@ import retrofit2.Response;
 
 public class DiscoverPresenterImpl extends MvpBasePresenter<DiscoverView> implements DiscoverPresenter {
 
+    private final MainRouter router;
     private Call<DiscoverResponse> discoverCall;
 
     @Inject
     MovieApi movieApi;
+
+
+    DiscoverPresenterImpl(MainRouter router) {
+        this.router = router;
+    }
 
     @Override
     public void detachView(boolean retainInstance) {
@@ -66,6 +73,6 @@ public class DiscoverPresenterImpl extends MvpBasePresenter<DiscoverView> implem
 
     @Override
     public void onMovieClicked(Movie movie) {
-
+        router.showMovieView(movie.getId());
     }
 }
