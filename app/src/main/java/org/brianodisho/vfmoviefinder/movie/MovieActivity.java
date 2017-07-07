@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -11,9 +13,9 @@ import android.widget.TextView;
 import com.hannesdorfmann.mosby3.mvp.MvpActivity;
 import com.squareup.picasso.Picasso;
 
-import org.brianodisho.vfmoviefinder.CustomApplication;
+import org.brianodisho.vfmoviefinder.VFMovieApplication;
 import org.brianodisho.vfmoviefinder.R;
-import org.brianodisho.vfmoviefinder.model.DiscoverResponse.Movie;
+import org.brianodisho.vfmoviefinder.model.MovieResponse.Movie;
 import org.brianodisho.vfmoviefinder.movie.MovieContract.MoviePresenter;
 import org.brianodisho.vfmoviefinder.movie.MovieContract.MovieView;
 
@@ -25,7 +27,7 @@ import javax.inject.Inject;
 
 public class MovieActivity extends MvpActivity<MovieView, MoviePresenter> implements MovieView {
 
-    private static final String MOVIE = "MOVIE";
+    private static final String EXTRA_MOVIE = "EXTRA_MOVIE";
 
     private ImageView backdrop;
     private TextView title, starRating, overview;
@@ -36,13 +38,13 @@ public class MovieActivity extends MvpActivity<MovieView, MoviePresenter> implem
 
     public static void start(Context context, Movie movie) {
         Intent starter = new Intent(context, MovieActivity.class);
-        starter.putExtra(MOVIE, movie);
+        starter.putExtra(EXTRA_MOVIE, movie);
         context.startActivity(starter);
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        ((CustomApplication) getApplication()).getApplicationComponent().inject(this);
+        ((VFMovieApplication) getApplication()).getApplicationComponent().inject(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movie);
 
@@ -62,8 +64,15 @@ public class MovieActivity extends MvpActivity<MovieView, MoviePresenter> implem
     @NonNull
     @Override
     public MoviePresenter createPresenter() {
-        Movie movie = getIntent().getExtras().getParcelable(MOVIE);
+        Movie movie = getIntent().getExtras().getParcelable(EXTRA_MOVIE);
         return new MoviePresenterImpl(movie);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.options_movie_activity, menu);
+        return true;
     }
 
     @Override
@@ -72,6 +81,9 @@ public class MovieActivity extends MvpActivity<MovieView, MoviePresenter> implem
             case android.R.id.home:
                 onBackPressed();
                 return true;
+            case R.id.action_share:
+                presenter.onShareClicked();
+                break;
         }
         return super.onOptionsItemSelected(item);
     }
@@ -97,7 +109,11 @@ public class MovieActivity extends MvpActivity<MovieView, MoviePresenter> implem
     }
 
     @Override
-    public void showShareCompatDialog() {
-
+    public void showShareDialog(Movie movie) {
+        Intent sendIntent = new Intent();
+        sendIntent.setAction(Intent.ACTION_SEND);
+        sendIntent.putExtra(Intent.EXTRA_TEXT, movie.getTitle());
+        sendIntent.setType("text/plain");
+        startActivity(Intent.createChooser(sendIntent, "Share Article"));
     }
 }

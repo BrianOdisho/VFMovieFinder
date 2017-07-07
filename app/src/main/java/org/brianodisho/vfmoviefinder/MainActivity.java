@@ -13,8 +13,10 @@ import com.hannesdorfmann.mosby3.mvp.MvpActivity;
 import org.brianodisho.vfmoviefinder.MainContract.MainPresenter;
 import org.brianodisho.vfmoviefinder.MainContract.MainView;
 import org.brianodisho.vfmoviefinder.discover.DiscoverFragment;
-import org.brianodisho.vfmoviefinder.model.DiscoverResponse.Movie;
+import org.brianodisho.vfmoviefinder.model.MovieResponse.Movie;
 import org.brianodisho.vfmoviefinder.movie.MovieActivity;
+import org.brianodisho.vfmoviefinder.search.SearchFragment;
+import org.brianodisho.vfmoviefinder.search.results.SearchResultsFragment;
 
 
 /**
@@ -69,7 +71,7 @@ public class MainActivity extends MvpActivity<MainView, MainPresenter> implement
 
     @Override
     public void showDiscoverView() {
-        showContentFragment(new DiscoverFragment());
+        showContentFragment(new DiscoverFragment(), false);
         if (getSupportActionBar() != null) {
             getSupportActionBar().setTitle(R.string.bottom_navigation_discover);
         }
@@ -77,9 +79,17 @@ public class MainActivity extends MvpActivity<MainView, MainPresenter> implement
 
     @Override
     public void showSearchView() {
-//        showContentFragment(new SearchFragment());
+        showContentFragment(new SearchFragment(), false);
         if (getSupportActionBar() != null) {
             getSupportActionBar().setTitle(R.string.bottom_navigation_search);
+        }
+    }
+
+    @Override
+    public void showSearchResultsView(String searchQuery) {
+        showContentFragment(SearchResultsFragment.newInstance(searchQuery), true);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setTitle(R.string.search_results);
         }
     }
 
@@ -89,7 +99,16 @@ public class MainActivity extends MvpActivity<MainView, MainPresenter> implement
     }
 
 
-    private void showContentFragment(Fragment fragment) {
-        getSupportFragmentManager().beginTransaction().replace(R.id.content_main, fragment).commit();
+    private void showContentFragment(Fragment fragment, boolean addToBackstack) {
+        if (addToBackstack) {
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.content_main, fragment)
+                    .addToBackStack(null)
+                    .commit();
+        } else {
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.content_main, fragment)
+                    .commit();
+        }
     }
 }

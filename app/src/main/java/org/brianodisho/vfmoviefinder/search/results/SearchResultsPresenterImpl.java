@@ -1,13 +1,13 @@
-package org.brianodisho.vfmoviefinder.discover;
+package org.brianodisho.vfmoviefinder.search.results;
 
 import com.hannesdorfmann.mosby3.mvp.MvpBasePresenter;
 
 import org.brianodisho.vfmoviefinder.MainRouter;
-import org.brianodisho.vfmoviefinder.discover.DiscoverContract.DiscoverPresenter;
-import org.brianodisho.vfmoviefinder.discover.DiscoverContract.DiscoverView;
 import org.brianodisho.vfmoviefinder.model.MovieResponse;
 import org.brianodisho.vfmoviefinder.model.MovieResponse.Movie;
 import org.brianodisho.vfmoviefinder.model.source.MovieApi;
+import org.brianodisho.vfmoviefinder.search.results.SearchResultsContract.SearchResultsPresenter;
+import org.brianodisho.vfmoviefinder.search.results.SearchResultsContract.SearchResultsView;
 
 import javax.inject.Inject;
 
@@ -16,45 +16,46 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 /**
- * Implementation of the DiscoverPresenter
+ * Implementation of the SearchResultsPresenter
  */
 
-public class DiscoverPresenterImpl extends MvpBasePresenter<DiscoverView> implements DiscoverPresenter {
+public class SearchResultsPresenterImpl extends MvpBasePresenter<SearchResultsView> implements SearchResultsPresenter {
 
     private final MainRouter router;
-    private Call<MovieResponse> discoverCall;
+    private Call<MovieResponse> searchCall;
 
     @Inject
     MovieApi movieApi;
 
 
-    DiscoverPresenterImpl(MainRouter router) {
+    SearchResultsPresenterImpl(MainRouter router) {
         this.router = router;
     }
 
     @Override
     public void detachView(boolean retainInstance) {
         super.detachView(retainInstance);
-        if (discoverCall != null) {
-            discoverCall.cancel();
-            discoverCall = null;
+        if (searchCall != null) {
+            searchCall.cancel();
+            searchCall = null;
         }
     }
 
     @Override
-    public void loadData(final boolean pullToRefresh) {
+    public void searchMovies(final boolean pullToRefresh, String searchQuery) {
         if (getView() != null) {
             getView().showLoading(pullToRefresh);
         }
 
-        discoverCall = movieApi.discoverMovies();
-        discoverCall.enqueue(new Callback<MovieResponse>() {
+        searchCall = movieApi.search(searchQuery);
+        searchCall.enqueue(new Callback<MovieResponse>() {
             @Override
             public void onResponse(Call<MovieResponse> call, Response<MovieResponse> response) {
                 if (response.isSuccessful()) {
                     MovieResponse movieResponse = response.body();
                     if (movieResponse != null) {
                         if (getView() != null) {
+                            getView().setResultCount(movieResponse.getMovies().size());
                             getView().setData(movieResponse.getMovies());
                             getView().showContent();
                         }

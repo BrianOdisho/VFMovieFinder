@@ -1,4 +1,4 @@
-package org.brianodisho.vfmoviefinder.discover;
+package org.brianodisho.vfmoviefinder.search.results;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -23,7 +23,7 @@ import javax.inject.Inject;
  * RecyclerView adapter for MovieHolder.
  */
 
-public class DiscoverMovieAdapter extends RecyclerView.Adapter<DiscoverMovieAdapter.MovieHolder> {
+public class SearchResultsMovieAdapter extends RecyclerView.Adapter<SearchResultsMovieAdapter.MovieHolder> {
 
     private final LayoutInflater inflater;
     private final Context context;
@@ -35,7 +35,7 @@ public class DiscoverMovieAdapter extends RecyclerView.Adapter<DiscoverMovieAdap
     Picasso picasso;
 
 
-    DiscoverMovieAdapter(@NonNull Context context, MovieHolder.OnMovieClickListener listener) {
+    SearchResultsMovieAdapter(@NonNull Context context, MovieHolder.OnMovieClickListener listener) {
         inflater = LayoutInflater.from(context);
         this.context = context;
         this.listener = listener;

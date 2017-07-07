@@ -1,6 +1,6 @@
 package org.brianodisho.vfmoviefinder;
 
-import org.brianodisho.vfmoviefinder.model.DiscoverResponse.Movie;
+import org.brianodisho.vfmoviefinder.model.MovieResponse.Movie;
 
 /**
  * Defines a view router for the main view.
@@ -10,5 +10,6 @@ public interface MainRouter {
     void showInTheatersView();
     void showDiscoverView();
     void showSearchView();
+    void showSearchResultsView(String searchQuery);
     void showMovieView(Movie movie);
 }

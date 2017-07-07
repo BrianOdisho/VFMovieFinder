@@ -5,11 +5,19 @@
     <string name="bottom_navigation_discover">Discover</string>
     <string name="bottom_navigation_search">Search</string>
 
+    <string name="action_share">Share</string>
 
     <string name="discovery_movie_star_rating">%.1f/10</string>
-    <string name="error_discovery_retry">Error while loading movies. Pull down to retry.</string>
-    <string name="error_discovery">Error while loading movies.</string>
 
     <string name="movie_star_rating">%1$.1f/10 (%2$d Votes)</string>
 
+    <string name="error_loading_retry">Error while loading movies. Pull down to retry.</string>
+    <string name="error_loading">Error while loading movies.</string>
+    <string name="error_searching">Error while searching movies.</string>
+
+    <string name="search_movies">Search Movies</string>
+    <string name="search_movies_required">Search Movies*</string>
+
+    <string name="search_results">Search Results</string>
+    <string name="search_results_count">%d Results</string>
 </resources>

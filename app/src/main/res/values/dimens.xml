@@ -13,4 +13,5 @@
 
     <dimen name="movie_backdrop_height">200dp</dimen>
 
+    <dimen name="search_results_search_query_height">28dp</dimen>
 </resources>

@@ -11,7 +11,7 @@ import com.google.gson.annotations.SerializedName;
  * POJO for the response returned by the discover endpoint of the api.
  */
 
-public class DiscoverResponse {
+public class MovieResponse {
 
     @SerializedName("page")
     private int page;
