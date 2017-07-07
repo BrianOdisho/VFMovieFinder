@@ -4,7 +4,7 @@ import android.app.Application;
 
 import org.brianodisho.vfmoviefinder.dagger.NetworkModule;
 
-public class VFMovieFinderApplication extends Application {
+public class CustomApplication extends Application {
 
     private ApplicationComponent applicationComponent;
 

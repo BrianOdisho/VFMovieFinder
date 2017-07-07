@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/bottom_navigation_in_theaters"
+        android:icon="@drawable/ic_theaters"
+        android:title="@string/bottom_navigation_in_theaters" />
+    <item
+        android:id="@+id/bottom_navigation_discover"
+        android:icon="@drawable/ic_discover"
+        android:title="@string/bottom_navigation_discover" />
+    <item
+        android:id="@+id/bottom_navigation_search"
+        android:icon="@drawable/ic_search"
+        android:title="@string/bottom_navigation_search" />
+</menu>

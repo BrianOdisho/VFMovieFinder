@@ -4,7 +4,11 @@ import java.util.List;
 
 import com.google.gson.annotations.SerializedName;
 
-public class DiscoverMoviesResponse {
+/**
+ * POJO for the response returned by the discover endpoint of the api.
+ */
+
+public class DiscoverResponse {
 
     @SerializedName("page")
     private int page;

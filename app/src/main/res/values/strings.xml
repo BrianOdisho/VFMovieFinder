@@ -1,9 +1,7 @@
 <resources>
-    <string name="app_name">VF Movie Finder</string>
+    <string name="app_name">VF Movies</string>
 
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="navigation_drawer_discover_movies">Discover Movies</string>
-
-    <string name="action_settings">Settings</string>
+    <string name="bottom_navigation_in_theaters">In Theaters</string>
+    <string name="bottom_navigation_discover">Discover</string>
+    <string name="bottom_navigation_search">Search</string>
 </resources>

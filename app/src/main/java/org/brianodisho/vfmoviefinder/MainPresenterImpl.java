@@ -8,15 +8,33 @@ import org.brianodisho.vfmoviefinder.MainContract.MainView;
 /**
  * Implementation of the MainPresenter
  */
+
 class MainPresenterImpl extends MvpBasePresenter<MainView> implements MainPresenter {
 
-    @Override
-    public void onViewReady() {
+    private final MainRouter router;
 
+
+    MainPresenterImpl(MainRouter router) {
+        this.router = router;
     }
 
     @Override
-    public void onDiscoverMoviesSelected() {
+    public void onViewReady() {
+        router.showDiscoverView();
+    }
 
+    @Override
+    public void onInTheatersSelected() {
+        router.showInTheatersView();
+    }
+
+    @Override
+    public void onDiscoverSelected() {
+        router.showDiscoverView();
+    }
+
+    @Override
+    public void onSearchSelected() {
+        router.showSearchView();
     }
 }

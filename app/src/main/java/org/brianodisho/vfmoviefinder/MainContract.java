@@ -4,8 +4,9 @@ import com.hannesdorfmann.mosby3.mvp.MvpPresenter;
 import com.hannesdorfmann.mosby3.mvp.MvpView;
 
 /**
- * This specifies the contract between the view and the presenter.
+ * Defines the contract between the MainView and MainPresenter.
  */
+
 interface MainContract {
 
     interface MainView extends MvpView {
@@ -13,6 +14,8 @@ interface MainContract {
 
     interface MainPresenter extends MvpPresenter<MainView> {
         void onViewReady();
-        void onDiscoverMoviesSelected();
+        void onInTheatersSelected();
+        void onDiscoverSelected();
+        void onSearchSelected();
     }
 }
