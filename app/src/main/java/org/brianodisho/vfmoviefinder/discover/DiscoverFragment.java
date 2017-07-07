@@ -17,10 +17,9 @@ import org.brianodisho.vfmoviefinder.R;
 import org.brianodisho.vfmoviefinder.VFMovieApplication;
 import org.brianodisho.vfmoviefinder.discover.DiscoverContract.DiscoverPresenter;
 import org.brianodisho.vfmoviefinder.discover.DiscoverContract.DiscoverView;
-import org.brianodisho.vfmoviefinder.model.MovieResponse.Movie;
+import org.brianodisho.vfmoviefinder.model.Movie;
 
 import java.util.List;
-
 
 /**
  * Implementation of the DiscoverView

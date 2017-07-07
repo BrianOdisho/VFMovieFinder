@@ -15,7 +15,7 @@ import com.squareup.picasso.Picasso;
 
 import org.brianodisho.vfmoviefinder.VFMovieApplication;
 import org.brianodisho.vfmoviefinder.R;
-import org.brianodisho.vfmoviefinder.model.MovieResponse.Movie;
+import org.brianodisho.vfmoviefinder.model.Movie;
 import org.brianodisho.vfmoviefinder.movie.MovieContract.MoviePresenter;
 import org.brianodisho.vfmoviefinder.movie.MovieContract.MovieView;
 

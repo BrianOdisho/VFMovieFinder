@@ -13,7 +13,7 @@ import com.hannesdorfmann.mosby3.mvp.MvpActivity;
 import org.brianodisho.vfmoviefinder.MainContract.MainPresenter;
 import org.brianodisho.vfmoviefinder.MainContract.MainView;
 import org.brianodisho.vfmoviefinder.discover.DiscoverFragment;
-import org.brianodisho.vfmoviefinder.model.MovieResponse.Movie;
+import org.brianodisho.vfmoviefinder.model.Movie;
 import org.brianodisho.vfmoviefinder.movie.MovieActivity;
 import org.brianodisho.vfmoviefinder.search.SearchFragment;
 import org.brianodisho.vfmoviefinder.search.results.SearchResultsFragment;

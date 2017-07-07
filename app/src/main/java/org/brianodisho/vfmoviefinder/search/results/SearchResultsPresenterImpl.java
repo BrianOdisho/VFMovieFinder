@@ -3,8 +3,8 @@ package org.brianodisho.vfmoviefinder.search.results;
 import com.hannesdorfmann.mosby3.mvp.MvpBasePresenter;
 
 import org.brianodisho.vfmoviefinder.MainRouter;
+import org.brianodisho.vfmoviefinder.model.Movie;
 import org.brianodisho.vfmoviefinder.model.MovieResponse;
-import org.brianodisho.vfmoviefinder.model.MovieResponse.Movie;
 import org.brianodisho.vfmoviefinder.model.source.MovieApi;
 import org.brianodisho.vfmoviefinder.search.results.SearchResultsContract.SearchResultsPresenter;
 import org.brianodisho.vfmoviefinder.search.results.SearchResultsContract.SearchResultsView;

@@ -3,7 +3,7 @@ package org.brianodisho.vfmoviefinder.movie;
 import com.hannesdorfmann.mosby3.mvp.MvpPresenter;
 import com.hannesdorfmann.mosby3.mvp.MvpView;
 
-import org.brianodisho.vfmoviefinder.model.MovieResponse.Movie;
+import org.brianodisho.vfmoviefinder.model.Movie;
 
 /**
  * Defines the contract between the MovieView and MoviePresenter.

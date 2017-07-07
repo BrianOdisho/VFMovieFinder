@@ -2,7 +2,7 @@ package org.brianodisho.vfmoviefinder.movie;
 
 import com.hannesdorfmann.mosby3.mvp.MvpBasePresenter;
 
-import org.brianodisho.vfmoviefinder.model.MovieResponse.Movie;
+import org.brianodisho.vfmoviefinder.model.Movie;
 import org.brianodisho.vfmoviefinder.movie.MovieContract.MoviePresenter;
 import org.brianodisho.vfmoviefinder.movie.MovieContract.MovieView;
 

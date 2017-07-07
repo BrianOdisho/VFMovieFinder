@@ -1,6 +1,6 @@
 package org.brianodisho.vfmoviefinder;
 
-import org.brianodisho.vfmoviefinder.model.MovieResponse.Movie;
+import org.brianodisho.vfmoviefinder.model.Movie;
 
 /**
  * Defines a view router for the main view.

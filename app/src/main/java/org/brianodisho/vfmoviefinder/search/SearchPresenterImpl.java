@@ -2,7 +2,6 @@ package org.brianodisho.vfmoviefinder.search;
 
 import com.hannesdorfmann.mosby3.mvp.MvpBasePresenter;
 
-
 import org.brianodisho.vfmoviefinder.MainRouter;
 import org.brianodisho.vfmoviefinder.model.source.MovieApi;
 import org.brianodisho.vfmoviefinder.search.SearchContract.SearchView;

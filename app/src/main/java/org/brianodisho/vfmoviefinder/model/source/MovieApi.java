@@ -13,13 +13,10 @@ import retrofit2.http.Query;
 public interface MovieApi {
 
     String BASE_URL = "https://api.themoviedb.org/3/";
-    String DISCOVER_TELEVISION_US_ENDPOINT = "discover/movie?language=en-US";
     String DISCOVER_MOVIES_US_ENDPOINT = "discover/movie?language=en-US&region=US";
     String SEARCH_MOVIES_US_ENDPOINT = "search/movie?language=en-US&region=US&include_adult=false";
     String API_KEY = "194dac02fb685b5e765287119c58d37f";
 
-    @GET(DISCOVER_TELEVISION_US_ENDPOINT)
-    Call<MovieResponse> discoverTelevision();
 
     @GET(DISCOVER_MOVIES_US_ENDPOINT)
     Call<MovieResponse> discoverMovies();

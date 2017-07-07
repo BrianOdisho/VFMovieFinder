@@ -15,15 +15,14 @@ import com.hannesdorfmann.mosby3.mvp.lce.MvpLceFragment;
 import org.brianodisho.vfmoviefinder.MainRouter;
 import org.brianodisho.vfmoviefinder.R;
 import org.brianodisho.vfmoviefinder.VFMovieApplication;
-import org.brianodisho.vfmoviefinder.model.MovieResponse.Movie;
+import org.brianodisho.vfmoviefinder.model.Movie;
 import org.brianodisho.vfmoviefinder.search.results.SearchResultsContract.SearchResultsPresenter;
 import org.brianodisho.vfmoviefinder.search.results.SearchResultsContract.SearchResultsView;
 
 import java.util.List;
 
-
 /**
- * Implementation of the DiscoverView
+ * Implementation of the SearchResultsView
  */
 
 public class SearchResultsFragment extends MvpLceFragment<RecyclerView, List<Movie>, SearchResultsView, SearchResultsPresenter>
