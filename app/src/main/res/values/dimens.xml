@@ -5,4 +5,10 @@
 
     <dimen name="bottom_navigation_size">56dp</dimen>
     <dimen name="bottom_navigation_elevation">8dp</dimen>
+
+    <dimen name="discover_movie_poster_width">100dp</dimen>
+    <dimen name="discover_movie_poster_height">150dp</dimen>
+    <dimen name="discover_movie_card_margin">8dp</dimen>
+    <dimen name="discover_movie_card_text_margin">4dp</dimen>
+
 </resources>

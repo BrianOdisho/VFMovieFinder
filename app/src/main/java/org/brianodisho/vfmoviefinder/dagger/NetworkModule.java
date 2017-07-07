@@ -4,7 +4,7 @@ import android.app.Application;
 
 import com.squareup.picasso.Picasso;
 
-import org.brianodisho.vfmoviefinder.model.source.remote.MovieApi;
+import org.brianodisho.vfmoviefinder.model.source.MovieApi;
 
 import java.io.IOException;
 

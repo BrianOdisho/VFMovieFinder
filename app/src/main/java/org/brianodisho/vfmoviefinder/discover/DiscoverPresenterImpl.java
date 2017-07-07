@@ -2,10 +2,11 @@ package org.brianodisho.vfmoviefinder.discover;
 
 import com.hannesdorfmann.mosby3.mvp.MvpBasePresenter;
 
+import org.brianodisho.vfmoviefinder.discover.DiscoverContract.DiscoverPresenter;
 import org.brianodisho.vfmoviefinder.discover.DiscoverContract.DiscoverView;
 import org.brianodisho.vfmoviefinder.model.DiscoverResponse;
 import org.brianodisho.vfmoviefinder.model.DiscoverResponse.Movie;
-import org.brianodisho.vfmoviefinder.model.source.remote.MovieApi;
+import org.brianodisho.vfmoviefinder.model.source.MovieApi;
 
 import javax.inject.Inject;
 
@@ -17,7 +18,7 @@ import retrofit2.Response;
  * Implementation of the DiscoverPresenter
  */
 
-public class DiscoverPresenterImpl extends MvpBasePresenter<DiscoverView> implements DiscoverContract.DiscoverPresenter {
+public class DiscoverPresenterImpl extends MvpBasePresenter<DiscoverView> implements DiscoverPresenter {
 
     private Call<DiscoverResponse> discoverCall;
 
@@ -65,11 +66,6 @@ public class DiscoverPresenterImpl extends MvpBasePresenter<DiscoverView> implem
 
     @Override
     public void onMovieClicked(Movie movie) {
-
-    }
-
-    @Override
-    public void onShareClicked(Movie movie) {
 
     }
 }

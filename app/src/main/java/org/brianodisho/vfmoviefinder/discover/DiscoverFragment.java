@@ -46,7 +46,7 @@ public class DiscoverFragment extends MvpLceFragment<SwipeRefreshLayout, List<Mo
         ((CustomApplication) getActivity().getApplication()).getApplicationComponent().inject(adapter);
 
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
-        recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2, LinearLayoutManager.VERTICAL, false));
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
         recyclerView.setAdapter(adapter);
 
         loadData(false);
@@ -77,12 +77,11 @@ public class DiscoverFragment extends MvpLceFragment<SwipeRefreshLayout, List<Mo
 
     @Override
     protected String getErrorMessage(Throwable e, boolean pullToRefresh) {
-//        if (pullToRefresh) {
-//            return getString(R.string.error_news_feed);
-//        } else {
-//            return getString(R.string.error_news_feed_retry);
-//        }
-        return e.getMessage();
+        if (pullToRefresh) {
+            return getString(R.string.error_discovery_retry);
+        } else {
+            return getString(R.string.error_discovery);
+        }
     }
 
     @Override
@@ -100,10 +99,5 @@ public class DiscoverFragment extends MvpLceFragment<SwipeRefreshLayout, List<Mo
     @Override
     public void onMovieClick(int position) {
         presenter.onMovieClicked(adapter.getItem(position));
-    }
-
-    @Override
-    public void onShareClick(int position) {
-        presenter.onShareClicked(adapter.getItem(position));
     }
 }

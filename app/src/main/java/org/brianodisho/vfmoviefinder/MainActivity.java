@@ -32,16 +32,6 @@ public class MainActivity extends MvpActivity<MainView, MainPresenter> implement
         navigationView.setOnNavigationItemSelectedListener(this);
         navigationView.setSelectedItemId(R.id.bottom_navigation_discover);
 
-//        BottomNavigationMenuView menuView = (BottomNavigationMenuView) navigationView.getChildAt(0);
-//        for (int index = 0, count = menuView.getChildCount(); index < count; index++) {
-//            BottomNavigationItemView itemView = (BottomNavigationItemView) menuView.getChildAt(index);
-//
-//            //noinspection RestrictedApi
-//            itemView.setShiftingMode(false);
-//            //noinspection RestrictedApi
-//            itemView.setChecked(false);
-//        }
-
         presenter.onViewReady();
     }
 
@@ -69,17 +59,26 @@ public class MainActivity extends MvpActivity<MainView, MainPresenter> implement
 
     @Override
     public void showInTheatersView() {
-        //        showContentFragment(new InTheatersFragment());
+//        showContentFragment(new InTheatersFragment());
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setTitle(R.string.bottom_navigation_in_theaters);
+        }
     }
 
     @Override
     public void showDiscoverView() {
         showContentFragment(new DiscoverFragment());
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setTitle(R.string.bottom_navigation_discover);
+        }
     }
 
     @Override
     public void showSearchView() {
 //        showContentFragment(new SearchFragment());
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setTitle(R.string.bottom_navigation_search);
+        }
     }
 
 

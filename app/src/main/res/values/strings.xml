@@ -4,4 +4,9 @@
     <string name="bottom_navigation_in_theaters">In Theaters</string>
     <string name="bottom_navigation_discover">Discover</string>
     <string name="bottom_navigation_search">Search</string>
+
+
+    <string name="discovery_movie_star_rating">%s/10</string>
+    <string name="error_discovery_retry">Error while loading movies. Pull down to retry.</string>
+    <string name="error_discovery">Error while loading movies.</string>
 </resources>

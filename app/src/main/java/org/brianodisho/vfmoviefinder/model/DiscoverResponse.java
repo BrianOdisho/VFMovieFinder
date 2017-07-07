@@ -45,6 +45,9 @@ public class DiscoverResponse {
 
     public static class Movie {
 
+        private static final String IMAGE_BASE_URL_BACKDROP = "https://image.tmdb.org/t/p/w780";
+        private static final String IMAGE_BASE_URL_POSTER = "https://image.tmdb.org/t/p/w500";
+
         @SerializedName("vote_count")
         private int voteCount;
 
@@ -123,6 +126,11 @@ public class DiscoverResponse {
         }
 
 
+        public String getPosterPathFull() {
+            return posterPath == null ? null : IMAGE_BASE_URL_POSTER + posterPath;
+        }
+
+
         public String getOriginalLanguage() {
             return originalLanguage;
         }
@@ -140,6 +148,11 @@ public class DiscoverResponse {
 
         public String getBackdropPath() {
             return backdropPath;
+        }
+
+
+        public String getBackdropPathFull() {
+            return backdropPath == null ? null : IMAGE_BASE_URL_BACKDROP + backdropPath;
         }
 
 

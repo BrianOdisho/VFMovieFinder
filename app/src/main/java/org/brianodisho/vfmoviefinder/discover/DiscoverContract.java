@@ -3,7 +3,7 @@ package org.brianodisho.vfmoviefinder.discover;
 import com.hannesdorfmann.mosby3.mvp.MvpPresenter;
 import com.hannesdorfmann.mosby3.mvp.lce.MvpLceView;
 
-import org.brianodisho.vfmoviefinder.model.DiscoverResponse;
+import org.brianodisho.vfmoviefinder.model.DiscoverResponse.Movie;
 
 import java.util.List;
 
@@ -13,12 +13,11 @@ import java.util.List;
 
 interface DiscoverContract {
 
-    interface DiscoverView extends MvpLceView<List<DiscoverResponse.Movie>> {
+    interface DiscoverView extends MvpLceView<List<Movie>> {
     }
 
     interface DiscoverPresenter extends MvpPresenter<DiscoverView> {
         void loadData(boolean pullToRefresh);
-        void onMovieClicked(DiscoverResponse.Movie movie);
-        void onShareClicked(DiscoverResponse.Movie movie);
+        void onMovieClicked(Movie movie);
     }
 }

@@ -13,7 +13,6 @@ import com.squareup.picasso.Picasso;
 
 import org.brianodisho.vfmoviefinder.R;
 import org.brianodisho.vfmoviefinder.model.DiscoverResponse.Movie;
-import org.brianodisho.vfmoviefinder.model.source.remote.MovieApi;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +26,7 @@ import javax.inject.Inject;
 public class DiscoverMovieAdapter extends RecyclerView.Adapter<DiscoverMovieAdapter.MovieHolder> {
 
     private final LayoutInflater inflater;
+    private final Context context;
     private final MovieHolder.OnMovieClickListener listener;
 
     private List<Movie> data;
@@ -37,6 +37,7 @@ public class DiscoverMovieAdapter extends RecyclerView.Adapter<DiscoverMovieAdap
 
     DiscoverMovieAdapter(@NonNull Context context, MovieHolder.OnMovieClickListener listener) {
         inflater = LayoutInflater.from(context);
+        this.context = context;
         this.listener = listener;
     }
 
@@ -48,11 +49,11 @@ public class DiscoverMovieAdapter extends RecyclerView.Adapter<DiscoverMovieAdap
     @Override
     public void onBindViewHolder(MovieHolder holder, int position) {
         Movie movie = data.get(position);
-        picasso.load(MovieApi.IMAGE_BASE_URL + MovieApi.IMAGE_POSTER_SIZE_SMALL + movie.getPosterPath())
-                .into(holder.image);
-//        holder.textTitle.setText(movie.getTitle());
-//        holder.textDate.setText(Formatter.toRelativeTimeSpanString(movie.getPublishedAt()));
-//        holder.textSource.setText(movie.getSource());
+
+        picasso.load(movie.getPosterPathFull()).into(holder.image);
+        holder.textTitle.setText(movie.getTitle());
+        holder.textStarRating.setText(context.getString(R.string.discovery_movie_star_rating, String.valueOf(movie.getVoteAverage())));
+        holder.textOverview.setText(movie.getOverview());
     }
 
     @Override
@@ -85,32 +86,26 @@ public class DiscoverMovieAdapter extends RecyclerView.Adapter<DiscoverMovieAdap
 
         interface OnMovieClickListener {
             void onMovieClick(int position);
-            void onShareClick(int position);
         }
 
 
         final ImageView image;
-        final TextView textTitle;
+        final TextView textTitle, textStarRating, textOverview;
 
 
         MovieHolder(View itemView, @NonNull final OnMovieClickListener onMovieClickListener) {
             super(itemView);
             image = (ImageView) itemView.findViewById(R.id.image_item_discover_movie_poster);
             textTitle = (TextView) itemView.findViewById(R.id.text_item_discover_movie_title);
+            textStarRating = (TextView) itemView.findViewById(R.id.text_item_discover_movie_starRating);
+            textOverview = (TextView) itemView.findViewById(R.id.text_item_discover_movie_overview);
+
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     onMovieClickListener.onMovieClick(getLayoutPosition());
                 }
             });
-            itemView.findViewById(R.id.button_item_discover_movie_share).setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    onMovieClickListener.onShareClick(getLayoutPosition());
-                }
-            });
-
-
         }
     }
 }
