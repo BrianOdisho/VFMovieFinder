@@ -1,8 +1,8 @@
-package org.brianodisho.vfmoviefinder.discover;
+package org.brianodisho.vfmoviefinder.intheaters;
 
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -15,20 +15,20 @@ import com.hannesdorfmann.mosby3.mvp.lce.MvpLceFragment;
 import org.brianodisho.vfmoviefinder.MainRouter;
 import org.brianodisho.vfmoviefinder.R;
 import org.brianodisho.vfmoviefinder.VFMovieApplication;
-import org.brianodisho.vfmoviefinder.discover.DiscoverContract.DiscoverPresenter;
-import org.brianodisho.vfmoviefinder.discover.DiscoverContract.DiscoverView;
+import org.brianodisho.vfmoviefinder.intheaters.InTheatersContract.InTheatersPresenter;
+import org.brianodisho.vfmoviefinder.intheaters.InTheatersContract.InTheatersView;
 import org.brianodisho.vfmoviefinder.model.Movie;
 
 import java.util.List;
 
 /**
- * Implementation of the DiscoverView
+ * Implementation of the InTheatersView
  */
 
-public class DiscoverFragment extends MvpLceFragment<SwipeRefreshLayout, List<Movie>, DiscoverView, DiscoverPresenter>
-        implements DiscoverView, DiscoverMovieAdapter.MovieHolder.OnMovieClickListener, SwipeRefreshLayout.OnRefreshListener {
+public class InTheatersFragment extends MvpLceFragment<SwipeRefreshLayout, List<Movie>, InTheatersView, InTheatersPresenter>
+        implements InTheatersView, InTheatersMovieAdapter.MovieHolder.OnMovieClickListener, SwipeRefreshLayout.OnRefreshListener {
 
-    private DiscoverMovieAdapter adapter;
+    private InTheatersMovieAdapter adapter;
 
     @Nullable
     @Override
@@ -41,7 +41,7 @@ public class DiscoverFragment extends MvpLceFragment<SwipeRefreshLayout, List<Mo
         super.onViewCreated(view, savedInstanceState);
         contentView.setOnRefreshListener(this);
 
-        adapter = new DiscoverMovieAdapter(getContext(), this);
+        adapter = new InTheatersMovieAdapter(getContext(), this);
         ((VFMovieApplication) getActivity().getApplication()).getApplicationComponent().inject(adapter);
 
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
@@ -53,8 +53,8 @@ public class DiscoverFragment extends MvpLceFragment<SwipeRefreshLayout, List<Mo
 
     @NonNull
     @Override
-    public DiscoverPresenter createPresenter() {
-        DiscoverPresenterImpl presenter = new DiscoverPresenterImpl((MainRouter) getActivity());
+    public InTheatersPresenter createPresenter() {
+        InTheatersPresenterImpl presenter = new InTheatersPresenterImpl((MainRouter) getActivity());
         ((VFMovieApplication) getActivity().getApplication()).getApplicationComponent().inject(presenter);
         return presenter;
     }

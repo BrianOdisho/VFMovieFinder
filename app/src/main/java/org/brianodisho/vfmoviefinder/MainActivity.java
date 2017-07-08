@@ -13,11 +13,11 @@ import com.hannesdorfmann.mosby3.mvp.MvpActivity;
 import org.brianodisho.vfmoviefinder.MainContract.MainPresenter;
 import org.brianodisho.vfmoviefinder.MainContract.MainView;
 import org.brianodisho.vfmoviefinder.discover.DiscoverFragment;
+import org.brianodisho.vfmoviefinder.intheaters.InTheatersFragment;
 import org.brianodisho.vfmoviefinder.model.Movie;
 import org.brianodisho.vfmoviefinder.movie.MovieActivity;
 import org.brianodisho.vfmoviefinder.search.SearchFragment;
 import org.brianodisho.vfmoviefinder.search.results.SearchResultsFragment;
-
 
 /**
  * Implementation of the MainView
@@ -63,7 +63,7 @@ public class MainActivity extends MvpActivity<MainView, MainPresenter> implement
 
     @Override
     public void showInTheatersView() {
-//        showContentFragment(new InTheatersFragment());
+        showContentFragment(new InTheatersFragment(), false);
         if (getSupportActionBar() != null) {
             getSupportActionBar().setTitle(R.string.bottom_navigation_in_theaters);
         }

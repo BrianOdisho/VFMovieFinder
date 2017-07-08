@@ -12,8 +12,7 @@
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/discover_movie_card_margin"
-        android:orientation="horizontal">
+        android:layout_margin="@dimen/discover_movie_card_margin">
 
         <ImageView
             android:id="@+id/image_item_discover_movie_poster"

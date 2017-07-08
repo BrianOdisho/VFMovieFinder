@@ -1,13 +1,16 @@
-package org.brianodisho.vfmoviefinder.discover;
+package org.brianodisho.vfmoviefinder.intheaters;
 
 import com.hannesdorfmann.mosby3.mvp.MvpBasePresenter;
 
 import org.brianodisho.vfmoviefinder.MainRouter;
-import org.brianodisho.vfmoviefinder.discover.DiscoverContract.DiscoverPresenter;
-import org.brianodisho.vfmoviefinder.discover.DiscoverContract.DiscoverView;
+import org.brianodisho.vfmoviefinder.intheaters.InTheatersContract.InTheatersPresenter;
+import org.brianodisho.vfmoviefinder.intheaters.InTheatersContract.InTheatersView;
 import org.brianodisho.vfmoviefinder.model.Movie;
 import org.brianodisho.vfmoviefinder.model.MovieResponse;
 import org.brianodisho.vfmoviefinder.model.source.MovieApi;
+import org.brianodisho.vfmoviefinder.util.Formatter;
+
+import java.util.concurrent.TimeUnit;
 
 import javax.inject.Inject;
 
@@ -16,28 +19,28 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 /**
- * Implementation of the DiscoverPresenter
+ * Implementation of the InTheatersPresenter
  */
 
-public class DiscoverPresenterImpl extends MvpBasePresenter<DiscoverView> implements DiscoverPresenter {
+public class InTheatersPresenterImpl extends MvpBasePresenter<InTheatersView> implements InTheatersPresenter {
 
     private final MainRouter router;
-    private Call<MovieResponse> discoverCall;
+    private Call<MovieResponse> inTheatersCall;
 
     @Inject
     MovieApi movieApi;
 
 
-    DiscoverPresenterImpl(MainRouter router) {
+    InTheatersPresenterImpl(MainRouter router) {
         this.router = router;
     }
 
     @Override
     public void detachView(boolean retainInstance) {
         super.detachView(retainInstance);
-        if (discoverCall != null) {
-            discoverCall.cancel();
-            discoverCall = null;
+        if (inTheatersCall != null) {
+            inTheatersCall.cancel();
+            inTheatersCall = null;
         }
     }
 
@@ -47,8 +50,11 @@ public class DiscoverPresenterImpl extends MvpBasePresenter<DiscoverView> implem
             getView().showLoading(pullToRefresh);
         }
 
-        discoverCall = movieApi.discoverMovies(null, null);
-        discoverCall.enqueue(new Callback<MovieResponse>() {
+        String startDate = Formatter.fromUnixTimestampToDate(System.currentTimeMillis() - TimeUnit.DAYS.toMillis(14));
+        String todaysDate = Formatter.fromUnixTimestampToDate(System.currentTimeMillis());
+
+        inTheatersCall = movieApi.discoverMovies(startDate, todaysDate);
+        inTheatersCall.enqueue(new Callback<MovieResponse>() {
             @Override
             public void onResponse(Call<MovieResponse> call, Response<MovieResponse> response) {
                 if (response.isSuccessful()) {
