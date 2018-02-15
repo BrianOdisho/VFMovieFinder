@@ -1,5 +1,6 @@
 package org.brianodisho.vfmoviefinder.search;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -15,6 +16,7 @@ import android.widget.TextView;
 
 import com.hannesdorfmann.mosby3.mvp.MvpFragment;
 
+import org.brianodisho.vfmoviefinder.ApplicationComponent;
 import org.brianodisho.vfmoviefinder.MainRouter;
 import org.brianodisho.vfmoviefinder.VFMovieApplication;
 import org.brianodisho.vfmoviefinder.R;
@@ -28,14 +30,22 @@ import org.brianodisho.vfmoviefinder.util.TextInputLayoutHelper;
 
 public class SearchFragment extends MvpFragment<SearchView, SearchPresenter> implements SearchView {
 
+    private ApplicationComponent applicationComponent;
+
     private EditText searchField;
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        applicationComponent = ((VFMovieApplication) activity.getApplication()).getApplicationComponent();
+    }
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_search, container, false);
 
-        searchField = (EditText) view.findViewById(R.id.editText_search);
+        searchField = view.findViewById(R.id.editText_search);
         searchField.setOnEditorActionListener(new EditText.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
@@ -71,7 +81,7 @@ public class SearchFragment extends MvpFragment<SearchView, SearchPresenter> imp
     @Override
     public SearchPresenter createPresenter() {
         SearchPresenterImpl presenter = new SearchPresenterImpl((MainRouter) getActivity());
-        ((VFMovieApplication) getActivity().getApplication()).getApplicationComponent().inject(presenter);
+        applicationComponent.inject(presenter);
         return presenter;
     }
 

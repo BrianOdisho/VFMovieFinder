@@ -53,10 +53,10 @@ public class MovieActivity extends MvpActivity<MovieView, MoviePresenter> implem
             getSupportActionBar().setDisplayShowTitleEnabled(false);
         }
 
-        backdrop = (ImageView) findViewById(R.id.image_movie_backdrop);
-        title = (TextView) findViewById(R.id.text_movie_title);
-        starRating = (TextView) findViewById(R.id.text_movie_starRating);
-        overview = (TextView) findViewById(R.id.text_movie_overview);
+        backdrop = findViewById(R.id.image_movie_backdrop);
+        title = findViewById(R.id.text_movie_title);
+        starRating = findViewById(R.id.text_movie_starRating);
+        overview = findViewById(R.id.text_movie_overview);
 
         presenter.onViewReady();
     }
