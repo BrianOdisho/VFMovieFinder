@@ -3,8 +3,11 @@ package org.brianodisho.vfmoviefinder;
 import android.os.Bundle;
 
 import android.support.annotation.NonNull;
+import android.support.annotation.StringRes;
 import android.support.design.widget.BottomNavigationView;
+import android.support.design.widget.BottomNavigationView.OnNavigationItemSelectedListener;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
@@ -23,16 +26,18 @@ import org.brianodisho.vfmoviefinder.search.results.SearchResultsFragment;
  * Implementation of the MainView
  */
 
-public class MainActivity extends MvpActivity<MainView, MainPresenter> implements MainView, MainRouter, BottomNavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends MvpActivity<MainView, MainPresenter>
+        implements MainView, MainRouter, OnNavigationItemSelectedListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        BottomNavigationView navigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation_main);
+        BottomNavigationView navigationView = findViewById(R.id.bottom_navigation_main);
         navigationView.setOnNavigationItemSelectedListener(this);
         navigationView.setSelectedItemId(R.id.bottom_navigation_discover);
 
@@ -61,54 +66,55 @@ public class MainActivity extends MvpActivity<MainView, MainPresenter> implement
         return true;
     }
 
+
+    //region MainRouter
     @Override
     public void showInTheatersView() {
         showContentFragment(new InTheatersFragment(), false);
-        if (getSupportActionBar() != null) {
-            getSupportActionBar().setTitle(R.string.bottom_navigation_in_theaters);
-        }
+        setActionBarTitle(R.string.bottom_navigation_in_theaters);
     }
 
     @Override
     public void showDiscoverView() {
         showContentFragment(new DiscoverFragment(), false);
-        if (getSupportActionBar() != null) {
-            getSupportActionBar().setTitle(R.string.bottom_navigation_discover);
-        }
+        setActionBarTitle(R.string.bottom_navigation_discover);
     }
 
     @Override
     public void showSearchView() {
         showContentFragment(new SearchFragment(), false);
-        if (getSupportActionBar() != null) {
-            getSupportActionBar().setTitle(R.string.bottom_navigation_search);
-        }
+        setActionBarTitle(R.string.bottom_navigation_search);
     }
 
     @Override
     public void showSearchResultsView(String searchQuery) {
         showContentFragment(SearchResultsFragment.newInstance(searchQuery), true);
-        if (getSupportActionBar() != null) {
-            getSupportActionBar().setTitle(R.string.search_results);
-        }
+        setActionBarTitle(R.string.search_results);
     }
 
     @Override
     public void showMovieView(Movie movie) {
         MovieActivity.start(this, movie);
     }
+    //endregion
+
+
+    private void setActionBarTitle(@StringRes int resId) {
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setTitle(resId);
+        }
+    }
 
 
     private void showContentFragment(Fragment fragment, boolean addToBackstack) {
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.content_main, fragment);
+
         if (addToBackstack) {
-            getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.content_main, fragment)
-                    .addToBackStack(null)
-                    .commit();
-        } else {
-            getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.content_main, fragment)
-                    .commit();
+            fragmentTransaction.addToBackStack(null);
         }
+
+        fragmentTransaction.commit();
     }
 }

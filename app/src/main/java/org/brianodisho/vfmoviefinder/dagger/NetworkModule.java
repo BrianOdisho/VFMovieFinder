@@ -37,28 +37,40 @@ public class NetworkModule {
 
     @Provides
     @Singleton
-    MovieApi provideMovieApi() {
+    GsonConverterFactory provideGsonConverterFactory() {
+        return GsonConverterFactory.create();
+    }
+
+    @Provides
+    @Singleton
+    OkHttpClient provideOkHttpClient() {
+        return new OkHttpClient.Builder()
+                .addInterceptor(new Interceptor() {
+                    @Override
+                    public Response intercept(Chain chain) throws IOException {
+                        Request interceptedRequest = chain.request();
+
+                        HttpUrl newHttpUrl = interceptedRequest.url().newBuilder()
+                                .addQueryParameter("api_key", MovieApi.API_KEY)
+                                .build();
+
+                        Request request = interceptedRequest.newBuilder()
+                                .url(newHttpUrl)
+                                .build();
+
+                        return chain.proceed(request);
+                    }
+                })
+                .build();
+    }
+
+    @Provides
+    @Singleton
+    MovieApi provideMovieApi(GsonConverterFactory converterFactory, OkHttpClient okHttpClient) {
         return new Retrofit.Builder()
-                .addConverterFactory(GsonConverterFactory.create())
+                .addConverterFactory(converterFactory)
                 .baseUrl(MovieApi.BASE_URL)
-                .client(new OkHttpClient.Builder()
-                        .addInterceptor(new Interceptor() {
-                            @Override
-                            public Response intercept(Chain chain) throws IOException {
-                                Request interceptedRequest = chain.request();
-
-                                HttpUrl newHttpUrl = interceptedRequest.url().newBuilder()
-                                        .addQueryParameter("api_key", MovieApi.API_KEY)
-                                        .build();
-
-                                Request request = interceptedRequest.newBuilder()
-                                        .url(newHttpUrl)
-                                        .build();
-
-                                return chain.proceed(request);
-                            }
-                        })
-                        .build())
+                .client(okHttpClient)
                 .build()
                 .create(MovieApi.class);
     }
