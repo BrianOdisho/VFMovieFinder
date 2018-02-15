@@ -94,8 +94,8 @@ public class InTheatersMovieAdapter extends RecyclerView.Adapter<InTheatersMovie
 
         MovieHolder(View itemView, @NonNull final OnMovieClickListener onMovieClickListener) {
             super(itemView);
-            image = (ImageView) itemView.findViewById(R.id.image_item_in_theaters);
-            imageBackground = (ImageView) itemView.findViewById(R.id.image_item_in_theaters_background);
+            image = itemView.findViewById(R.id.image_item_in_theaters);
+            imageBackground = itemView.findViewById(R.id.image_item_in_theaters_background);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
